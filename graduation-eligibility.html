@@ -507,39 +507,39 @@
         contentDiv.appendChild(card);
       }
       // المواد الراسبة
-      if (data.failed_courses && data.failed_courses.length) {
-        const card = document.createElement('div');
-        card.className = 'grad-card failed-courses mb-4';
-        card.innerHTML = `
-          <div class="card-title"><i class="fas fa-exclamation-triangle"></i> المواد التي تم الرسوب فيها <span class="course-count">${data.failed_courses.length} مادة</span></div>
-          <div class="table-container"><div class="table-responsive"><table class="table table-bordered table-striped"><thead class="table-light"><tr>
-            <th>كود المادة</th><th>اسم المادة</th><th>الساعات</th><th>الدرجة</th><th>الفصل</th><th>إمكانية الإعادة</th>
-          </tr></thead><tbody></tbody></table></div></div>
-        `;
-        const tbody = card.querySelector('tbody');
-        data.failed_courses.forEach(c => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${c.code}</td><td>${c.name}</td><td>${c.credits}</td><td class="grade-cell grade-low">${c.grade}</td><td><span class="semester-badge">${c.semester}</span></td><td><span class="badge badge-available">${c.can_retake ? 'نعم' : 'لا'}</span></td>`;
-          tbody.appendChild(tr);
-        });
-        contentDiv.appendChild(card);
-      }
-      // الإنذارات الأكاديمية
-      if (data.academic_warnings && data.academic_warnings.has_warnings) {
-        const card = document.createElement('div');
-        card.className = 'grad-card mb-4';
-        card.innerHTML = `<div class="card-title"><i class="fas fa-exclamation-triangle"></i> الإنذارات الأكاديمية (${data.academic_warnings.count})</div>`;
-        const ul = document.createElement('ul');
-        ul.className = 'list-group';
-        data.academic_warnings.types.forEach(t => {
-          const li = document.createElement('li');
-          li.className = 'list-group-item list-group-item-warning fw-bold';
-          li.textContent = t;
-          ul.appendChild(li);
-        });
-        card.appendChild(ul);
-        contentDiv.appendChild(card);
-      }
+      // if (data.failed_courses && data.failed_courses.length) {
+      //   const card = document.createElement('div');
+      //   card.className = 'grad-card failed-courses mb-4';
+      //   card.innerHTML = `
+      //     <div class="card-title"><i class="fas fa-exclamation-triangle"></i> المواد التي تم الرسوب فيها <span class="course-count">${data.failed_courses.length} مادة</span></div>
+      //     <div class="table-container"><div class="table-responsive"><table class="table table-bordered table-striped"><thead class="table-light"><tr>
+      //       <th>كود المادة</th><th>اسم المادة</th><th>الساعات</th><th>الدرجة</th><th>الفصل</th><th>إمكانية الإعادة</th>
+      //     </tr></thead><tbody></tbody></table></div></div>
+      //   `;
+      //   const tbody = card.querySelector('tbody');
+      //   data.failed_courses.forEach(c => {
+      //     const tr = document.createElement('tr');
+      //     tr.innerHTML = `<td>${c.code}</td><td>${c.name}</td><td>${c.credits}</td><td class="grade-cell grade-low">${c.grade}</td><td><span class="semester-badge">${c.semester}</span></td><td><span class="badge badge-available">${c.can_retake ? 'نعم' : 'لا'}</span></td>`;
+      //     tbody.appendChild(tr);
+      //   });
+      //   contentDiv.appendChild(card);
+      // }
+      // // الإنذارات الأكاديمية
+      // if (data.academic_warnings && data.academic_warnings.has_warnings) {
+      //   const card = document.createElement('div');
+      //   card.className = 'grad-card mb-4';
+      //   card.innerHTML = `<div class="card-title"><i class="fas fa-exclamation-triangle"></i> الإنذارات الأكاديمية (${data.academic_warnings.count})</div>`;
+      //   const ul = document.createElement('ul');
+      //   ul.className = 'list-group';
+      //   data.academic_warnings.types.forEach(t => {
+      //     const li = document.createElement('li');
+      //     li.className = 'list-group-item list-group-item-warning fw-bold';
+      //     li.textContent = t;
+      //     ul.appendChild(li);
+      //   });
+      //   card.appendChild(ul);
+      //   contentDiv.appendChild(card);
+      // }
       // التخطيط للتخرج
       if (data.graduation_planning) {
         const card = document.createElement('div');
