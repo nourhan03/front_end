@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المسارات الأكاديمية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="stupaths.css">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav class="student-sidebar p-3">
+      <div class="text-center mb-4">
+        <h5 class="title">صفحة الطالب<br>بكلية العلوم - جامعة الفيوم</h5>
+        <img src="images/3d-graduate-male-student-with-hat-cartoon-character_10560477.png!f305cw" alt="User" class="rounded-circle" width="60">
+        <p class="mb-0">أحمد محمد علي</p>
+        <small>رقم القيد: 2022021234</small>
+      </div>
+     <hr>
+      <ul class="nav flex-column">
+      <li class="nav-item"><a href="registeredcourses.html" class="nav-link"><i class="bi bi-journal-bookmark-fill"></i> المواد المسجلة</a></li>
+      <li class="nav-item"><a href="stucourses.html" class="nav-link"><i class="bi bi-clipboard2-check-fill"></i> تسجيل المواد</a></li>
+      <li class="nav-item"><a href="stuschedule.html" class="nav-link"><i class="bi bi-calendar-week"></i> الجدول الدراسي</a></li>
+      <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="bi bi-person-check"></i> الدرجات والنتائج</a></li>
+      <li class="nav-item"><a href="stuprofile.html" class="nav-link"><i class="bi bi-person-circle"></i> الملف الشخصي</a></li>
+      <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="fas fa-chart-bar"></i> تحليل الاداء الاكاديمي</a></li>
+      <li class="nav-item"><a href="acadimeicwarning.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i> 
+        الانذارات الاكاديمية</a></li>
+      <li class="nav-item"><a href="stupaths.html" class="nav-link"><i class="fas fa-code-branch"></i> المسارات الاكاديمية</a></li>
+      <li class="nav-item"><a href="graduation-eligibility.html" class="nav-link"><i class="fas fa-graduation-cap"></i> التحقق من أهلية التخرج</a></li>
+      <li class="nav-item"><a href="studashboard.html" class="nav-link active"><i class="bi bi-speedometer2"></i> التقارير</a></li>
+      <li class="nav-item"><a href="#" class="nav-link n"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a></li>
+      </ul>
+    </nav>
+
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h2><i class="fas fa-code-branch"></i> المسارات الأكاديمية</h2>
+                <div>
+                    <button class="btn btn-primary" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> تحديث البيانات
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="loading-container">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">جاري التحميل...</span>
+                </div>
+                <p class="mt-3">جاري تحميل بيانات المسارات الأكاديمية...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error" class="error-container" style="display: none;">
+                <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>خطأ في تحميل البيانات:</strong>
+                    <span id="errorMessage"></span>
+                </div>
+                <button class="btn btn-outline-primary" onclick="loadPathData()">
+                    <i class="fas fa-redo"></i> إعادة المحاولة
+                </button>
+            </div>
+
+            <!-- Data Container -->
+            <div id="dataContainer" class="data-container" style="display: none;">
+                <!-- Student Info Card -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-user-graduate"></i> معلومات الطالب</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="student-info">
+                            <div class="info-item">
+                                <span class="label">الاسم:</span>
+                                <span id="studentName" class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">رقم الطالب:</span>
+                                <span id="studentId" class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">الفصل الدراسي الحالي:</span>
+                                <span id="currentSemester" class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">القسم:</span>
+                                <span id="division" class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">الساعات المكتملة:</span>
+                                <span id="creditsCompleted" class="value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Status Card -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-info-circle"></i> الحالة الحالية</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="status-info">
+                            <span id="currentStatus" class="status-text"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Recommendation Card -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-brain"></i> التوصية الذكية</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="smart-recommendation">
+                            <div class="recommendation-main">
+                                <div class="recommendation-header">
+                                    <h4>التخصص الموصى به</h4>
+                                    <span id="recommendedSpecialization" class="specialization-badge"></span>
+                                </div>
+                                <div class="recommendation-details">
+                                    <div class="detail-item">
+                                        <span class="label">مستوى الثقة:</span>
+                                        <span id="confidenceLevel" class="value"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">درجة الملاءمة:</span>
+                                        <span id="suitabilityScore" class="value"></span>
+                                    </div>
+                                </div>
+                                <div class="reasoning-section">
+                                    <h5>الأسباب:</h5>
+                                    <ul id="reasoningList" class="reasoning-list"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alternative Options Card -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-list-alt"></i> الخيارات البديلة</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="alternativeOptions" class="alternative-options"></div>
+                    </div>
+                </div>
+
+                <!-- General Recommendations Card -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-lightbulb"></i> التوصيات العامة</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="recommendations">
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h4>ملاحظة عامة</h4>
+                                    <p id="recommendationNote"></p>
+                                </div>
+                            </div>
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h4>الخطوة التالية</h4>
+                                    <p id="nextStep"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPathData();
+        });
+
+        function loadPathData() {
+            document.getElementById('loading').style.display = 'flex';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('dataContainer').style.display = 'none';
+
+            // Existing API endpoint
+            const apiUrl = 'http://web-production-6364b.up.railway.app/api/division-recommendations/3735';
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success' && data.data) {
+                        displayData(data.data, function() {
+                            // After rendering the old data, fetch and render the new API data
+                            loadCourseScheduleData();
+                        });
+                    } else {
+                        throw new Error('Invalid data format received from API');
+                    }
+                })
+                .catch(error => {
+                    showError(error.message);
+                });
+        }
+
+        function displayData(data, callback) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dataContainer').style.display = 'block';
+
+            // Fill student info
+            if (data.student_info) {
+                document.getElementById('studentName').textContent = data.student_info.name || 'غير متوفر';
+                document.getElementById('studentId').textContent = data.student_info.id || 'غير متوفر';
+                document.getElementById('currentSemester').textContent = data.student_info.current_semester || 'غير متوفر';
+                document.getElementById('division').textContent = data.student_info.division || 'غير متوفر';
+                document.getElementById('creditsCompleted').textContent = data.student_info.credits_completed || '0';
+            }
+
+            // Fill current status
+            if (data.recommendations && data.recommendations.current_status) {
+                document.getElementById('currentStatus').textContent = data.recommendations.current_status;
+            }
+
+            // Fill smart recommendation
+            if (data.recommendations && data.recommendations.smart_recommendation) {
+                const smartRec = data.recommendations.smart_recommendation;
+                document.getElementById('recommendedSpecialization').textContent = smartRec.recommended_specialization || 'غير متوفر';
+                document.getElementById('confidenceLevel').textContent = smartRec.confidence_level || 'غير متوفر';
+                document.getElementById('suitabilityScore').textContent = smartRec.suitability_score || 'غير متوفر';
+                
+                // Fill reasoning list
+                const reasoningList = document.getElementById('reasoningList');
+                reasoningList.innerHTML = '';
+                if (smartRec.reasoning && Array.isArray(smartRec.reasoning)) {
+                    smartRec.reasoning.forEach(reason => {
+                        const li = document.createElement('li');
+                        li.textContent = reason;
+                        reasoningList.appendChild(li);
+                    });
+                }
+            }
+
+            // Fill alternative options
+            if (data.recommendations && data.recommendations.alternative_options) {
+                const alternativesContainer = document.getElementById('alternativeOptions');
+                alternativesContainer.innerHTML = '';
+                
+                data.recommendations.alternative_options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'alternative-option-item';
+                    optionDiv.innerHTML = `
+                        <div class="option-header">
+                            <h4>${option.specialization}</h4>
+                            <span class="option-score">${option.suitability_score}</span>
+                        </div>
+                        <div class="option-details">
+                            <div class="detail-item">
+                                <span class="label">مستوى التوصية:</span>
+                                <span class="value">${option.recommendation_level}</span>
+                            </div>
+                        </div>
+                        <div class="option-reasoning">
+                            <h5>الأسباب:</h5>
+                            <ul>
+                                ${option.brief_reasoning.map(reason => `<li>${reason}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                    alternativesContainer.appendChild(optionDiv);
+                });
+            }
+
+            // Fill general recommendations
+            if (data.recommendations) {
+                document.getElementById('recommendationNote').textContent = data.recommendations.note || 'غير متوفر';
+                document.getElementById('nextStep').textContent = data.recommendations.next_step || 'غير متوفر';
+            }
+
+            if (typeof callback === 'function') callback();
+        }
+
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('errorMessage').textContent = message;
+        }
+
+        function refreshData() {
+            loadPathData();
+        }
+
+        // Fetch and render the new API data (course-schedule/6580)
+        function loadCourseScheduleData() {
+            const apiUrl = 'http://web-production-6364b.up.railway.app/api/course-schedule/3735';
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success' && data.data) {
+                        renderCourseScheduleCards(data.data);
+                    } else {
+                        throw new Error('Invalid data format received from Course Schedule API');
+                    }
+                })
+                .catch(error => {
+                    // Optionally show error for this section only
+                });
+        }
+
+        // Render the new API data in styled cards
+        function renderCourseScheduleCards(data) {
+            const container = document.getElementById('dataContainer');
+            // --- DO NOT show Student Info Card or Current Stage from new API ---
+            Object.entries(data).forEach(([key, value]) => {
+                if (key === 'student_info' || key === 'current_stage') return;
+                // Special handling for semester_plans (render each semester as a card)
+                if (key === 'semester_plans' && typeof value === 'object') {
+                    Object.values(value).forEach(plan => {
+                        const card = document.createElement('div');
+                        card.className = 'info-card';
+                        let coursesTable = '';
+                        if (plan.courses && Array.isArray(plan.courses)) {
+                            coursesTable = `<div class=\"table-responsive\"><table class=\"table table-bordered\"><thead><tr><th>اسم المقرر</th><th>الكود</th><th>الساعات</th><th>القسم</th><th>إجباري؟</th></tr></thead><tbody>` +
+                                plan.courses.map(c => `<tr><td>${c.course_name}</td><td>${c.course_code}</td><td>${c.credits}</td><td>${c.department || ''}</td><td>${c.is_mandatory ? 'نعم' : 'لا'}</td></tr>`).join('') +
+                                `</tbody></table></div>`;
+                        }
+                        // Render all plan attributes except courses
+                        let planDetails = Object.entries(plan)
+                            .filter(([k]) => k !== 'courses')
+                            .map(([k, v]) => `<div class=\"info-item\"><span class=\"label\">${k}:</span><span class=\"value\">${v}</span></div>`)
+                            .join('');
+                        card.innerHTML = `
+                            <div class=\"card-header\"><h3><i class=\"fas fa-calendar-week\"></i> ${plan.semester_name || 'فصل دراسي'} (جدولة المقررات)</h3></div>
+                            <div class=\"card-body\">
+                                ${planDetails}
+                                ${coursesTable}
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                } else if (typeof value === 'object' && value !== null) {
+                    // Render nested object as a card with all its attributes
+                    const card = document.createElement('div');
+                    card.className = 'info-card';
+                    let details = Object.entries(value)
+                        .map(([k, v]) => `<div class=\"info-item\"><span class=\"label\">${k}:</span><span class=\"value\">${v}</span></div>`)
+                        .join('');
+                    card.innerHTML = `
+                        <div class=\"card-header\"><h3><i class=\"fas fa-info-circle\"></i> ${key}</h3></div>
+                        <div class=\"card-body\">${details}</div>
+                    `;
+                    container.appendChild(card);
+                } else {
+                    // Render primitive value as a card
+                    const card = document.createElement('div');
+                    card.className = 'info-card';
+                    card.innerHTML = `
+                        <div class=\"card-header\"><h3><i class=\"fas fa-info-circle\"></i> ${key}</h3></div>
+                        <div class=\"card-body\"><span class=\"value\">${value}</span></div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

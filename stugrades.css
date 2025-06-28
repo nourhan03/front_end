@@ -1,0 +1,181 @@
+body {
+  background-color: #f7fafd;
+  font-family: Tahoma, sans-serif;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.n {
+  margin-top: 20px;
+}
+
+.student-sidebar {
+  background-color: #003366;
+  color: white;
+  min-width: 230px;
+  position: fixed;
+  right: 0; /* ✅ يظل على اليمين */
+  top: 0;
+  height: 100vh;
+  z-index: 1000;
+  direction: rtl; /* ✅ تخلي الكتابة من اليمين لليسار */
+}
+
+.student-sidebar .title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.student-sidebar .link {
+  color: #ddd;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 12px;
+  align-items: center;
+}
+
+.me {
+  margin: 25px;
+}
+
+.student-sidebar ul.nav {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.student-sidebar ul.nav li.nav-item:last-child {
+  margin-top: 30px;
+}
+
+h3 {
+  color: #003366;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+.student-sidebar .nav-link {
+  color: #ddd;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 4px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 4px;
+}
+
+.nav-link i {
+  margin-left: 10px;
+  width: 24px;
+  text-align: center;
+}
+
+.student-sidebar .nav-link.active {
+  background-color: #ffc107;
+  color: white;
+  width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 4px;
+}
+
+.student-sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.176);
+  color: white !important;
+  width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 4px;
+}
+
+#ff {
+  color: #ffc107;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.student-sidebar .nav-link.active:hover {
+  background-color: #ffc107;
+  color: white;
+}
+/* المحتوى الرئيسي */
+.content {
+  margin-right: 260px;
+  padding: 20px;
+}
+
+.content h4 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #003366;
+  font-size: 24px;
+}
+
+.table-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #003366;
+  color: white;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+tr:hover {
+  background-color: #f0f0f0;
+}
+
+.error-message {
+  background-color: #fff3f3;
+  color: #dc3545;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.error-message small {
+  display: block;
+  margin-top: 5px;
+  color: #666;
+}
+
+/* تحسينات للأجهزة المحمولة */
+@media (max-width: 768px) {
+  .student-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .content {
+    margin-right: 0;
+  }
+
+  .table-container {
+    margin: 0 -20px;
+    border-radius: 0;
+  }
+}

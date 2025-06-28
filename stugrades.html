@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الدرجات والنتائج</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>
+  <style>
+    html, body {
+      overflow-y: auto;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      font-family: Tahoma, sans-serif;
+      background-color: #f7fafd;
+    }
+    .student-sidebar {
+      background-color: #003366;
+      color: white;
+      min-width: 230px;
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      z-index: 1000;
+    }
+    .student-sidebar .title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .student-sidebar .nav-link {
+      color: #ddd;
+      margin: 2px;
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      padding: 8px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .student-sidebar .nav-link i {
+      margin-left: 10px;
+      width: 24px;
+      text-align: center;
+    }
+    .student-sidebar .nav-link.active {
+      background-color: #ffc107;
+      color: white;
+    }
+    .student-sidebar .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.176);
+      color: white !important;
+    }
+    .content {
+      margin-right: 230px;
+      padding: 40px;
+    }
+    .content h4 {
+      color: #003366;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+    .table-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #dee2e6;
+    }
+    th {
+      background-color: #003366;
+      color: white;
+      font-weight: 600;
+    }
+    tr:hover {
+      background-color: #f8f9fa;
+    }
+    .error-message {
+      color: #dc3545;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- الشريط الجانبي -->
+  
+  <nav class="student-sidebar p-3">
+    <div class="text-center mb-4">
+      <h5 class="title">صفحة الطالب<br>بكلية العلوم - جامعة الفيوم</h5>
+      <img src="images/3d-graduate-male-student-with-hat-cartoon-character_10560477.png!f305cw" alt="User" class="rounded-circle" width="60">
+      <p class="mb-0">أحمد محمد علي</p>
+      <small>رقم القيد: 2022021234</small>
+    </div>
+    <hr>
+    <ul class="nav flex-column">
+      <li class="nav-item"><a href="registeredcourses.html" class="nav-link"><i class="bi bi-journal-bookmark-fill"></i> المواد المسجلة</a></li>
+      <li class="nav-item"><a href="stucourses.html" class="nav-link"><i class="bi bi-clipboard2-check-fill"></i> تسجيل المواد</a></li>
+      <li class="nav-item"><a href="stuschedule.html" class="nav-link"><i class="bi bi-calendar-week"></i> الجدول الدراسي</a></li>
+      <li class="nav-item"><a href="stugrades.html" class="nav-link active"><i class="bi bi-person-check"></i> الدرجات والنتائج</a></li>
+      <li class="nav-item"><a href="stuprofile.html" class="nav-link"><i class="bi bi-person-circle"></i> الملف الشخصي</a></li>
+      <li class="nav-item"><a href="grades.html" class="nav-link"><i class="fas fa-chart-bar"></i> تحليل الاداء الاكاديمي</a></li>
+      <li class="nav-item"><a href="acadimeicwarning.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i> الانذارات الاكاديمية</a></li>
+      <li class="nav-item"><a href="stupaths.html" class="nav-link"><i class="fas fa-code-branch"></i> المسارات الاكاديمية</a></li>
+      <li class="nav-item"><a href="graduation-eligibility.html" class="nav-link"><i class="fas fa-graduation-cap"></i> التحقق من أهلية التخرج</a></li>
+      <li class="nav-item"><a href="studashboard.html" class="nav-link"><i class="bi bi-speedometer2"></i> التقارير</a></li>
+      <li class="nav-item"><a href="#" class="nav-link n"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a></li>
+    </ul>
+  </nav>
+
+  <!-- محتوى الدرجات -->
+  <div class="content">
+    <h4><i class="bi bi-person-check"></i> الدرجات والنتائج</h4>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>اسم المادة</th>
+            <th>كود المادة</th>
+            <th>درجة الامتحان الأول</th>
+            <th>درجة الامتحان الثاني</th>
+            <th>الامتحان النهائي</th>
+            <th>الدرجة النهائية</th>
+            <th>الفصل الدراسي</th>
+          </tr>
+        </thead>
+        <tbody id="gradesTableBody">
+          <tr><td colspan="7">جاري تحميل البيانات...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const studentId = 21295;
+    const url = `http://facultymanagementsystemapi.runasp.net/api/Student/GetGradesByStudentId/${studentId}`;
+    const tbody = document.getElementById("gradesTableBody");
+
+    tbody.innerHTML = '<tr><td colspan="7">جاري تحميل البيانات...</td></tr>';
+
+    async function fetchGrades() {
+      try {
+        const response = await fetch(url);
+        console.log('حالة الاستجابة:', response.status);
+        
+        if (!response.ok) {
+          throw new Error(`خطأ في الاتصال: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log('البيانات المستلمة:', data);
+
+        if (!data || data.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7">لا توجد بيانات درجات حالياً.</td></tr>`;
+          return;
+        }
+
+        data.sort((a, b) => a.semster - b.semster);
+
+        tbody.innerHTML = "";
+        data.forEach(grade => {
+          const row = `
+            <tr>
+              <td>${grade.courseName || 'غير محدد'}</td>
+              <td>${grade.code || 'غير محدد'}</td>
+              <td>${grade.exam1Grade ? grade.exam1Grade.toFixed(2) : 'غير محدد'}</td>
+              <td>${grade.exam2Grade ? grade.exam2Grade.toFixed(2) : 'غير محدد'}</td>
+              <td>${grade.finalGrade ? grade.finalGrade.toFixed(2) : 'غير محدد'}</td>
+              <td>${grade.grade ? grade.grade.toFixed(2) : 'غير محدد'}</td>
+              <td>${grade.semster || 'غير محدد'}</td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error("تفاصيل الخطأ:", error);
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7">
+              <div class="error-message">
+                حدث خطأ أثناء تحميل البيانات: ${error.message}
+                <br>
+                <small>يرجى المحاولة مرة أخرى لاحقاً أو التواصل مع الدعم الفني</small>
+              </div>
+            </td>
+          </tr>`;
+      }
+    }
+
+    fetchGrades();
+  </script>
+</body>
+</html>

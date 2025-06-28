@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإنذارات الأكاديمية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        html, body {
+          overflow-y: auto;
+          margin: 0;
+          padding: 0;
+          direction: rtl;
+          font-family: Tahoma, sans-serif;
+          background-color: #f7fafd;
+        }
+    
+        .student-sidebar {
+          background-color: #003366;
+          color: white;
+          min-width: 230px;
+          position: fixed;
+          right: 0;
+          top: 0;
+          height: 100vh;
+          z-index: 1000;
+        }
+    
+        .student-sidebar .title {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 20px;
+          color: white;
+        }
+    
+        .student-sidebar .link {
+          color: #ddd;
+          margin: 12px;
+          align-items: center;
+        }
+    
+        .me {
+          margin: 25px;
+        }
+    
+        .student-sidebar ul.nav {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          padding-left: 0;
+          margin-bottom: 0;
+        }
+    
+        .student-sidebar .nav-link {
+          color: #ddd;
+          margin: 2px;
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          padding: 8px 12px;
+          border-radius: 4px;
+          text-decoration: none;
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    
+        .student-sidebar .nav-link i {
+          margin-left: 10px;
+          width: 24px;
+          text-align: center;
+        }
+    
+        .student-sidebar .nav-link.active {
+          background-color: #ffc107;
+          color: white;
+        }
+    
+        .student-sidebar .nav-link:hover {
+          background-color: rgba(255, 255, 255, 0.176);
+          color: white !important;
+        }
+
+        .main-content {
+            margin-right: 230px;
+            padding: 40px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            color: #003366;
+            font-weight: 700;
+        }
+
+        .warning-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-right: 5px solid #ffc107;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .warning-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .warning-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .warning-card h5 {
+            color: #003366;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .warning-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item p {
+            margin: 0;
+            color: #555;
+            font-size: 15px;
+        }
+        
+        .detail-item p strong {
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .detail-item i {
+            margin-left: 8px;
+            color: #0056b3;
+        }
+        
+        .notes-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <nav class="student-sidebar p-3">
+        <div class="text-center mb-4">
+          <h5 class="title">صفحة الطالب<br>بكلية العلوم - جامعة الفيوم</h5>
+          <img src="images/3d-graduate-male-student-with-hat-cartoon-character_10560477.png!f305cw" alt="User" class="rounded-circle" width="60">
+          <p id="student-name" class="mb-0">جار التحميل...</p>
+          <small id="student-id">رقم القيد: ...</small>
+        </div>
+        <hr>
+        <ul class="nav flex-column">
+          <li class="nav-item"><a href="registeredcourses.html" class="nav-link"><i class="bi bi-journal-bookmark-fill"></i> المواد المسجلة</a></li>
+          <li class="nav-item"><a href="stucourses.html" class="nav-link"><i class="bi bi-clipboard2-check-fill"></i> تسجيل المواد</a></li>
+          <li class="nav-item"><a href="stuschedule.html" class="nav-link"><i class="bi bi-calendar-week"></i> الجدول الدراسي</a></li>
+          <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="bi bi-person-check"></i> الدرجات والنتائج</a></li>
+          <li class="nav-item"><a href="stuprofile.html" class="nav-link"><i class="bi bi-person-circle"></i> الملف الشخصي</a></li>
+          <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="fas fa-chart-bar"></i> تحليل الاداء الاكاديمي</a></li>
+          <li class="nav-item"><a href="acadimeicwarning.html" class="nav-link active"><i class="fas fa-exclamation-triangle"></i> الانذارات الاكاديمية</a></li>
+          <li class="nav-item"><a href="stupaths.html" class="nav-link"><i class="fas fa-code-branch"></i> المسارات الاكاديمية</a></li>
+          <li class="nav-item"><a href="graduation-eligibility.html" class="nav-link"><i class="fas fa-graduation-cap"></i> التحقق من أهلية التخرج</a></li>
+          <li class="nav-item"><a href="studashboard.html" class="nav-link"><i class="bi bi-speedometer2"></i> التقارير</a></li>
+          <li class="nav-item"><a href="#" class="nav-link n"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a></li>
+        </ul>
+      </nav>
+    
+    <div class="main-content">
+        <div class="header">
+            <h2><i class="fas fa-exclamation-triangle"></i> الإنذارات الأكاديمية</h2>
+        </div>
+        <div id="warnings-container">
+            <!-- Warnings will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const studentId = 400285;
+            const apiUrl = `http://web-production-3489a.up.railway.app/api/academic-warnings/${studentId}`;
+            const container = document.getElementById('warnings-container');
+            const studentNameEl = document.getElementById('student-name');
+            const studentIdEl = document.getElementById('student-id');
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Update student info in the sidebar
+                    if (data.student) {
+                        studentNameEl.textContent = data.student.name;
+                        studentIdEl.textContent = `رقم القيد: ${data.student.id}`;
+                    }
+
+                    // Display warnings
+                    if (data.warnings && data.warnings.length > 0) {
+                        data.warnings.forEach(warning => {
+                            let statusClass = warning.status === 'نشط' ? 'bg-success' : 'bg-danger';
+                            const warningCard = `
+                                <div class="warning-card">
+                                    <div class="warning-header">
+                                        <h5><i class="fas fa-exclamation-triangle"></i> ${warning.type_ar}</h5>
+                                        <span class="badge bg-warning text-dark fs-6">${warning.level_ar}</span>
+                                    </div>
+                                    <hr>
+                                    <div class="warning-details-grid">
+                                        <div class="detail-item">
+                                            <p><strong><i class="fas fa-calendar-alt"></i> تاريخ الإصدار:</strong> ${new Date(warning.issue_date).toLocaleDateString()}</p>
+                                        </div>
+                                        <div class="detail-item">
+                                            <p><strong><i class="fas fa-graduation-cap"></i> الفصل الدراسي:</strong> ${warning.semester}</p>
+                                        </div>
+                                        <div class="detail-item">
+                                            <p><strong><i class="fas fa-info-circle"></i> الحالة:</strong> <span class="badge ${statusClass}">${warning.status}</span></p>
+                                        </div>
+                                        <div class="detail-item">
+                                            <p><strong><i class="fas fa-tasks"></i> الإجراء المطلوب:</strong> ${warning.action_required}</p>
+                                        </div>
+                                    </div>
+                                     <div class="notes-section">
+                                        <p><strong><i class="fas fa-comment-dots"></i> الوصف:</strong> ${warning.description}</p>
+                                        <p class="mt-3"><strong><i class="fas fa-sticky-note"></i> ملاحظات:</strong> ${warning.notes ? warning.notes.replace(/\n/g, '<br>') : 'لا توجد'}</p>
+                                    </div>
+                                </div>
+                            `;
+                            container.innerHTML += warningCard;
+                        });
+                    } else {
+                        container.innerHTML = '<div class="alert alert-success">لا توجد إنذارات أكاديمية حالية.</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    container.innerHTML = '<div class="alert alert-danger">حدث خطأ أثناء جلب البيانات. قد يكون الخادم غير متاح حاليًا.</div>';
+                });
+        });
+    </script>
+</body>
+</html>

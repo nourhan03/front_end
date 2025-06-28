@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الجدول الدراسي</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="stuschedule.css">
+</head>
+<body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="student-sidebar p-3">
+      <div class="text-center mb-4">
+        <h5 class="title">صفحة الطالب<br>بكلية العلوم - جامعة الفيوم</h5>
+        <img src="images/3d-graduate-male-student-with-hat-cartoon-character_10560477.png!f305cw" alt="User" class="rounded-circle" width="60">
+        <p class="mb-0">أحمد محمد علي</p>
+        <small>رقم القيد: 2022021234</small>
+      </div>
+      <hr>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a href="registeredcourses.html" class="nav-link"><i class="bi bi-journal-bookmark-fill"></i> المواد المسجلة</a></li>
+        <li class="nav-item"><a href="stucourses.html" class="nav-link"><i class="bi bi-clipboard2-check-fill"></i> تسجيل المواد</a></li>
+        <li class="nav-item"><a href="stuschedule.html" class="nav-link active"><i class="bi bi-calendar-week"></i> الجدول الدراسي</a></li>
+        <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="bi bi-person-check"></i> الدرجات والنتائج</a></li>
+        <li class="nav-item"><a href="stuprofile.html" class="nav-link"><i class="bi bi-person-circle"></i> الملف الشخصي</a></li>
+        <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="fas fa-chart-bar"></i> تحليل الاداء الاكاديمي</a></li>
+        <li class="nav-item"><a href="acadimeicwarning.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i> الانذارات الاكاديمية</a></li>
+        <li class="nav-item"><a href="stupaths.html" class="nav-link"><i class="fas fa-code-branch"></i> المسارات الاكاديمية</a></li>
+        <li class="nav-item"><a href="graduation-eligibility.html" class="nav-link"><i class="fas fa-graduation-cap"></i> التحقق من أهلية التخرج</a></li>
+        <li class="nav-item"><a href="studashboard.html" class="nav-link"><i class="bi bi-speedometer2"></i> التقارير</a></li>
+        <li class="nav-item"><a href="#" class="nav-link n"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content w-100 p-4">
+      <div class="header d-flex justify-content-between align-items-center">
+        <h2><i class="fas fa-calendar-alt"></i> الجدول الدراسي</h2>
+        <div>
+          <button class="btn btn-outline-primary">تصدير PDF</button>
+          <button class="btn btn-outline-success">تصدير iCal</button>
+        </div>
+      </div>
+
+      <table class="schedule-table table table-bordered text-center mt-3" id="scheduleTable">
+        <thead class="table-light">
+          <tr>
+            <th>الوقت</th>
+            <th>الأحد</th>
+            <th>الاثنين</th>
+            <th>الثلاثاء</th>
+            <th>الأربعاء</th>
+            <th>الخميس</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>08:00 - 09:30</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>09:30 - 11:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>11:00 - 12:30</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>12:30 - 14:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>14:00 - 15:30</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>15:30 - 17:00</td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    const token = 'ضع_التوكن_هنا'; // ← ✨ غيّريها بالتوكن الحقيقي
+
+    const table = document.querySelector('#scheduleTable tbody');
+
+    const dayColumn = { Sunday: 1, Monday: 2, Tuesday: 3, Wednesday: 4, Thursday: 5 };
+    const timeSlots = {
+      "08:00": 0, "09:30": 1, "11:00": 2,
+      "12:30": 3, "14:00": 4, "15:30": 5
+    };
+
+    function clearTable() {
+      for (let row of table.rows) {
+        for (let i = 1; i <= 5; i++) row.cells[i].innerHTML = '';
+      }
+    }
+
+    function fetchSchedule() {
+      fetch("http://facultymanagementsystemapi.runasp.net/api/Class/StudentClasses", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        clearTable();
+        data.forEach(item => {
+          const row = timeSlots[item.startTime?.substring(0,5)];
+          const col = dayColumn[item.day];
+          if (row !== undefined && col !== undefined) {
+            table.rows[row].cells[col].innerHTML = `
+              <div class="class-box">
+                ${item.courseName}<br>
+                ${item.doctorName} | ${item.classType} <a href="#">${item.location}</a><br>
+                ${item.startTime} - ${item.endTime}
+              </div>`;
+          }
+        });
+      })
+      .catch(err => console.error("خطأ في تحميل الجدول:", err));
+    }
+
+    function convertDayToIcal(day) {
+      return { Sunday: "SU", Monday: "MO", Tuesday: "TU", Wednesday: "WE", Thursday: "TH" }[day] || "MO";
+    }
+
+    // PDF
+    document.querySelector('.btn-outline-primary').addEventListener('click', () => {
+      html2pdf().from(document.getElementById('scheduleTable')).save('جدول_الدراسة.pdf');
+    });
+
+    // iCal
+    document.querySelector('.btn-outline-success').addEventListener('click', () => {
+      fetch("http://facultymanagementsystemapi.runasp.net/api/Class/StudentClasses", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\n";
+        data.forEach(e => {
+          const start = `20250630T${e.startTime.replace(':', '')}00`;
+          const end = `20250630T${e.endTime.replace(':', '')}00`;
+          ics += `BEGIN:VEVENT\nSUMMARY:${e.courseName}\nDTSTART;TZID=Asia/Cairo:${start}\nDTEND;TZID=Asia/Cairo:${end}\nLOCATION:${e.location}\nDESCRIPTION:${e.doctorName}\nRRULE:FREQ=WEEKLY;BYDAY=${convertDayToIcal(e.day)}\nEND:VEVENT\n`;
+        });
+        ics += "END:VCALENDAR";
+        const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'جدول_الدراسة.ics';
+        link.click();
+      });
+    });
+
+    window.onload = fetchSchedule;
+  </script>
+</body>
+</html>
+
+

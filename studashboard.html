@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+  <title>Power BI - بيانات الطلاب</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="stuschedule.css">
+   <style>
+    html, body {
+      overflow-y: auto;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      font-family: Tahoma, sans-serif;
+      background-color: #f7fafd;
+    }
+
+    .student-sidebar {
+      background-color: #003366;
+      color: white;
+      min-width: 230px;
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      z-index: 1000;
+    }
+
+    .student-sidebar .title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .student-sidebar .link {
+      color: #ddd;
+      margin: 12px;
+      align-items: center;
+    }
+
+    .me {
+      margin: 25px;
+    }
+
+    .student-sidebar ul.nav {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+
+    .student-sidebar .nav-link {
+      color: #ddd;
+      margin: 2px;
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      padding: 8px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .student-sidebar .nav-link i {
+      margin-left: 10px;
+      width: 24px;
+      text-align: center;
+    }
+
+    .student-sidebar .nav-link.active {
+      background-color: #ffc107;
+      color: white;
+    }
+
+    .student-sidebar .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.176);
+      color: white !important;
+    }
+
+    .report-container {
+      height: 100vh;
+      margin-right: 230px; /* تترك مساحة للـ sidebar */
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    h3 {
+      color: #003366;
+      font-size: 35px;
+      font-weight: 800;
+    }
+
+    .n {
+      margin-top: 20px;
+    }
+
+    #ff {
+      color: #ffc107;
+      font-size: 35px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  
+     <nav class="student-sidebar p-3">
+      <div class="text-center mb-4">
+        <h5 class="title">صفحة الطالب<br>بكلية العلوم - جامعة الفيوم</h5>
+        <img src="images/3d-graduate-male-student-with-hat-cartoon-character_10560477.png!f305cw" alt="User" class="rounded-circle" width="60">
+        <p class="mb-0">أحمد محمد علي</p>
+        <small>رقم القيد: 2022021234</small>
+      </div>
+     <hr>
+      <ul class="nav flex-column">
+      <li class="nav-item"><a href="registeredcourses.html" class="nav-link"><i class="bi bi-journal-bookmark-fill"></i> المواد المسجلة</a></li>
+      <li class="nav-item"><a href="stucourses.html" class="nav-link"><i class="bi bi-clipboard2-check-fill"></i> تسجيل المواد</a></li>
+      <li class="nav-item"><a href="stuschedule.html" class="nav-link"><i class="bi bi-calendar-week"></i> الجدول الدراسي</a></li>
+      <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="bi bi-person-check"></i> الدرجات والنتائج</a></li>
+      <li class="nav-item"><a href="stuprofile.html" class="nav-link"><i class="bi bi-person-circle"></i> الملف الشخصي</a></li>
+      <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="fas fa-chart-bar"></i> تحليل الاداء الاكاديمي</a></li>
+      <li class="nav-item"><a href="acadimeicwarning.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i> 
+        الانذارات الاكاديمية</a></li>
+      <li class="nav-item"><a href="stupaths.html" class="nav-link"><i class="fas fa-code-branch"></i> المسارات الاكاديمية</a></li>
+      <li class="nav-item"><a href="graduation-eligibility.html" class="nav-link"><i class="fas fa-graduation-cap"></i> التحقق من أهلية التخرج</a></li>
+      <li class="nav-item"><a href="studashboard.html" class="nav-link active"><i class="bi bi-speedometer2"></i> التقارير</a></li>
+      <li class="nav-item"><a href="#" class="nav-link n"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a></li>
+      </ul>
+    </nav>
+
+ 
+  <div class="report-container">
+    <iframe 
+      title="Student DB" 
+      src="https://app.powerbi.com/reportEmbed?reportId=780172d2-ebec-4d9b-b4e6-b69449af33ab&autoAuth=true&ctid=5f593c84-cad4-46c8-b3de-321c3e829a99" 
+      allowFullScreen="true">
+    </iframe>
+  </div>
+
+</body>
+</html>

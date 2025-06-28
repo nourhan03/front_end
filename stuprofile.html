@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الملف الشخصي</title>
+
+  <!-- Bootstrap RTL + Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+<link rel="stylesheet" href="stuprofile.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Cairo', sans-serif;
+    }
+   
+    
+    
+  </style>
+</head>
+<body>
+<nav class="student-sidebar p-3">
+  <div class="text-center mb-4">
+    <h5 class="title">نظام شؤون الطلاب بكلية<br>العلوم، جامعة الفيوم</h5>
+    <img src="images/3d-graduate-male-student-with-hat-cartoon-character_10560477.png!f305cw" alt="User" class="rounded-circle" width="60">
+    <p class="mb-0" id="studentName">جاري التحميل...</p>
+    <small id="studentId">رقم القيد: ...</small>
+  </div>
+  <hr>
+  <ul class="nav flex-column">
+    <li class="nav-item"><a href="registeredcourses.html" class="nav-link"><i class="bi bi-journal-bookmark-fill"></i> المواد المسجلة</a></li>
+    <li class="nav-item"><a href="stucourses.html" class="nav-link"><i class="bi bi-clipboard2-check-fill"></i> تسجيل المواد</a></li>
+    <li class="nav-item"><a href="stuschedule.html" class="nav-link"><i class="bi bi-calendar-week"></i> الجدول الدراسي</a></li>
+    <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="bi bi-person-check"></i> الدرجات والنتائج</a></li>
+      <li class="nav-item"><a href="stuprofile.html" class="nav-link active"><i class="bi bi-person-circle"></i> الملف الشخصي</a></li>
+    <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="fas fa-chart-bar"></i> تحليل الاداء الاكاديمي</a></li>
+    <li class="nav-item"><a href="acadimeicwarning.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i> الانذارات الاكاديمية</a></li>
+    <li class="nav-item"><a href="stupaths.html" class="nav-link"><i class="fas fa-code-branch"></i> المسارات الاكاديمية</a></li>
+    <li class="nav-item"><a href="graduation-eligibility.html" class="nav-link"><i class="fas fa-graduation-cap"></i> التحقق من أهلية التخرج</a></li>
+    <li class="nav-item"><a href="studashboard.html" class="nav-link"><i class="bi bi-speedometer2"></i> التقارير</a></li>
+        <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a></li>
+  </ul>
+</nav>
+
+<!-- ✅ بطاقة البيانات -->
+<div class="student-card" id="studentCard">
+  <p>جاري تحميل البيانات...</p>
+</div>
+
+<!-- ✅ Script لعرض البيانات -->
+<script>
+  fetch('http://facultymanagementsystemapi.runasp.net/api/Student/StudentById/3690')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("studentName").textContent = data.name;
+      document.getElementById("studentId").textContent = "رقم القيد: " + data.id;
+
+      const card = document.getElementById("studentCard");
+      card.innerHTML = `
+        <div class="text-center mb-3">
+          <img src="images/3d-graduate-male-student-with-hat-cartoon-character_10560477.png!f305cw" alt="صورة الطالب" width="90" class="rounded-circle mb-2">
+          <h2>${data.name}</h2>
+          <p>طالب - كلية العلوم</p>
+          <p>${data.departmentName} - ${data.studentLevel}</p>
+          <small >رقم القيد: ${data.id}</small>
+        </div>
+        <hr>
+        <h5 class="mb-3">المعلومات الشخصية</h5>
+        <div class="row">
+          <div class="col-md-6"><strong>الرقم القومي:</strong> ${data.nationalId}</div>
+          <div class="col-md-6"><strong>النوع:</strong> ${data.gender}</div>
+          <div class="col-md-6"><strong>الجنسية:</strong> ${data.nationality}</div>
+          <div class="col-md-6"><strong>البريد الإلكتروني:</strong> ${data.email}</div>
+          <div class="col-md-6"><strong>رقم الهاتف:</strong> ${data.phone}</div>
+          <div class="col-md-6"><strong>تاريخ الميلاد:</strong> ${data.dateOfBirth.split('T')[0]}</div>
+          <div class="col-md-6"><strong>تاريخ الالتحاق:</strong> ${data.enrollmentDate.split('T')[0]}</div>
+          <div class="col-md-6"><strong>الحالة:</strong> ${data.status}</div>
+          <div class="col-md-6"><strong>الترم الحالي:</strong> ${data.semester}</div>
+          <div class="col-md-6"><strong>عدد الساعات المكتسبة:</strong> ${data.creditsCompleted}</div>
+          <div class="col-md-6"><strong>المعدل التراكمي:</strong> ${data.gpA_Average}</div>
+          <div class="col-md-6"><strong>مجموع الثانوية:</strong> ${data.high_School_degree}</div>
+          <div class="col-md-6"><strong>شعبة الثانوية:</strong> ${data.high_School_Section}</div>
+          <div class="col-md-6"><strong>القسم:</strong> ${data.departmentName}</div>
+          <div class="col-md-6"><strong>الشعبة:</strong> ${data.divisionName}</div>
+        </div>
+      `;
+    })
+    .catch(error => {
+      document.getElementById("studentCard").innerHTML = `<p style="color: red;">حدث خطأ أثناء تحميل البيانات.</p>`;
+      console.error('Fetch Error:', error);
+    });
+</script>
+
+</body>
+</html>

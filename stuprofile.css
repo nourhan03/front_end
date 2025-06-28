@@ -1,0 +1,145 @@
+body {
+  background-color: #f7fafd;
+  font-family: Tahoma, sans-serif;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.n {
+  margin-top: 20px;
+}
+.student-sidebar {
+      width: 260px;
+      background-color: #003366;
+      color: white;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
+ 
+
+.student-sidebar .title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.student-sidebar .link {
+  color: #ddd;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 12px;
+  align-items: center;
+}
+
+.me {
+  margin: 25px;
+}
+
+.student-sidebar ul.nav {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.student-sidebar ul.nav li.nav-item:last-child {
+  margin-top: 30px;
+}
+
+h3 {
+  color: #003366;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+.student-sidebar .nav-link {
+  color: #ddd;
+  margin: 2px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.student-sidebar .nav-link i {
+  margin-left: 10px;
+  width: 24px;
+  text-align: center;
+}
+
+.student-sidebar .nav-link.active {
+  background-color: #ffc107;
+  color: white;
+  width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 4px;
+}
+
+.student-sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.176);
+  color: white !important;
+  width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 4px;
+}
+
+#ff {
+  color: #ffc107;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.student-sidebar .nav-link.active:hover {
+  background-color: #ffc107;
+  color: white;
+}
+
+.student-card {
+      margin-right: 280px;
+      margin-top: 20px;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .student-card h2 {
+      color: #003366;
+    }
+    .student-card .row div {
+      margin-bottom: 15px;
+    }
+    .student-card .text-center{
+        background-color:#2196f3 ;
+        padding: 40px;
+        color: white;
+        border-radius: 12px 12px 0 0;
+
+    
+    }
+    .text-center h2{
+color: white;
+    }
+    small{
+       margin-bottom: -10px;
+        margin-top: 12px;
+        color:#f3f1f1;
+       background-color: rgba(255, 255, 255, 0.5);
+       border-radius: 7px;
+       padding: 4px;
+
+    }
+    .student-card h5{
+        font-size: 25px;
+        color: #003366;
+        font-weight: 600;
+        margin: 15px;
+        
+    }

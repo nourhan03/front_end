@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* لون خلفية خفيف */
+    direction: rtl; /* للتأكد من الاتجاه من اليمين لليسار */
+    text-align: right; /* محاذاة النص لليمين */
+    line-height: 1.6; /* تحسين قابلية القراءة */
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 280px; /* Adjusted width slightly */
+    background-color: #003366; /* اللون الأزرق الداكن من الباليت */
+    color: white;
+    padding: 20px 15px; /* Adjusted padding */
+    height: 100vh; /* ارتفاع كامل للشاشة */
+    position: fixed; /* تثبيت الشريط الجانبي */
+    top: 0;
+    right: 0; /* Position on the right for RTL */
+    overflow-y: auto; /* Add scroll if content overflows */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+}
+
+.user-info {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle separator */
+}
+
+.user-info img {
+    width: 70px; /* Adjusted size */
+    height: 70px; /* Adjusted size */
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid white; /* حدود بيضاء للصورة */
+    object-fit: cover; /* Ensure image covers the area */
+}
+
+.user-info h3 {
+    margin: 10px 0 5px 0; /* Adjusted margin */
+    font-size: 1.1em; /* Adjusted font size */
+    font-weight: bold; /* جعل الاسم أغمق */
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 0.9em; /* Adjusted font size */
+    color: #cccccc; /* Lighter color for ID */
+}
+
+.navigation ul {
+    list-style: none;
+    padding: 0;
+}
+
+.navigation li {
+    margin-bottom: 8px; /* زيادة طفيفة في المسافة بين العناصر */
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 15px; /* Adjusted padding */
+    display: flex; /* Use flex for icon and text alignment */
+    align-items: center; /* Vertically align items */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 1em; /* Adjusted font size */
+}
+
+.navigation a:hover,
+.navigation li.active a {
+    background-color: #2196f3; /* اللون الأزرق الفاتح من الباليت */
+}
+
+.navigation a i {
+    margin-left: 10px; /* Space between text and icon */
+    font-size: 1.2em; /* Icon size */
+}
+
+.main-content {
+    margin-right: 280px; /* Match sidebar width */
+    padding: 20px;
+    flex-grow: 1;
+}
+
+header h1 {
+    color: #003366; /* اللون الأزرق الداكن */
+    border-bottom: 2px solid #2196f3; /* خط أزرق تحت العنوان */
+    padding-bottom: 15px; /* Adjusted padding */
+    margin-bottom: 25px; /* Adjusted margin */
+    font-size: 1.8em; /* Adjusted font size */
+    font-weight: bold; /* جعل عنوان الصفحة أغمق */
+}
+
+/* Using other colors from the palette for potential future use */
+/* #dc3545 - أحمر */
+/* #ffc107 - أصفر/برتقالي */
+/* #4caf50 - أخضر */ 
+
+/* Update sidebar navigation spacing if it exists */
+.navigation ul li a,
+.sidebar .nav-link {
+  padding: 8px 12px;
+  margin: 2px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+} 

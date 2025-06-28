@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تسجيل المواد</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="stuschedule.css">
+  <style>
+    body { background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%); }
+    .main-content { flex: 1; padding: 2.5rem 2rem; background: none; }
+    .api-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #00336618;
+      border-right: 6px solid #0d6efd;
+      margin-bottom: 2.5rem;
+      padding: 2.2rem 2rem 1.5rem 2rem;
+      transition: box-shadow 0.3s, transform 0.3s;
+      position: relative;
+    }
+    .api-card .card-title {
+      font-size: 1.35rem;
+      font-weight: bold;
+      color: #003366;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .api-card .courses-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .course-card {
+      background: #f7fafd;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px #00336611;
+      border-right: 4px solid #ffc107;
+      padding: 1.2rem 1rem 1rem 1rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+    }
+    .course-card:hover {
+      box-shadow: 0 8px 24px #00336622;
+      border-right-color: #0d6efd;
+    }
+    .course-title { font-size: 1.1rem; font-weight: bold; color: #0d6efd; margin-bottom: 0.4rem; }
+    .course-code { font-size: 1rem; color: #003366; font-weight: 600; }
+    .course-desc { font-size: 0.97rem; color: #444; margin: 0.5rem 0; }
+    .prof { color: #6c757d; font-size: 0.97rem; margin-bottom: 0.2rem; }
+    .meta { font-size: 0.95rem; color: #888; margin-top: 0.2rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .reason { background: #e9ecef; border-radius: 7px; padding: 0.3rem 0.6rem; font-size: 0.95rem; margin-top: 0.4rem; color: #333; }
+    .error-msg, .loading { text-align: center; color: #888; margin: 2rem 0; font-size: 1.1rem; }
+    @media (max-width: 900px) { .main-content { padding: 1rem; } .api-card { padding: 1.2rem 0.5rem; } .api-card .courses-list { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <div class="d-flex">
+    <nav class="student-sidebar p-3">
+      <div class="text-center mb-4">
+        <h5 class="title">صفحة الطالب<br>بكلية العلوم - جامعة الفيوم</h5>
+        <img src="images/3d-graduate-male-student-with-hat-cartoon-character_10560477.png!f305cw" alt="User" class="rounded-circle" width="60">
+        <p class="mb-0">أحمد محمد علي</p>
+        <small>رقم القيد: 2022021234</small>
+      </div>
+      <hr>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a href="registeredcourses.html" class="nav-link"><i class="bi bi-journal-bookmark-fill"></i> المواد المسجلة</a></li>
+        <li class="nav-item"><a href="stucourses.html" class="nav-link active"><i class="bi bi-clipboard2-check-fill"></i> تسجيل المواد</a></li>
+        <li class="nav-item"><a href="stuschedule.html" class="nav-link"><i class="bi bi-calendar-week"></i> الجدول الدراسي</a></li>
+        <li class="nav-item"><a href="stugrades.html" class="nav-link"><i class="bi bi-person-check"></i> الدرجات والنتائج</a></li>
+        <li class="nav-item"><a href="stuprofile.html" class="nav-link"><i class="bi bi-person-circle"></i> الملف الشخصي</a></li>
+        <li class="nav-item"><a href="grades.html" class="nav-link"><i class="fas fa-chart-bar"></i> تحليل الاداء الاكاديمي</a></li>
+        <li class="nav-item"><a href="acadimeicwarning.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i> الانذارات الاكاديمية</a></li>
+        <li class="nav-item"><a href="stupaths.html" class="nav-link"><i class="fas fa-code-branch"></i> المسارات الاكاديمية</a></li>
+        <li class="nav-item"><a href="graduation-eligibility.html" class="nav-link"><i class="fas fa-graduation-cap"></i> التحقق من أهلية التخرج</a></li>
+        <li class="nav-item"><a href="studashboard.html" class="nav-link"><i class="bi bi-speedometer2"></i> التقارير</a></li>
+        <li class="nav-item"><a href="#" class="nav-link n"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a></li>
+      </ul>
+    </nav>
+    <div class="main-content">
+      <div id="session-registered-courses" class="api-card" style="border-right-color:#28a745; display:none;">
+        <div class="card-title"><i class="fa-solid fa-check-circle" style="color:#28a745;"></i> المواد التي تم تسجيلها في هذه الجلسة</div>
+        <div class="courses-list" id="session-registered-list"></div>
+      </div>
+      <div id="mandatory-card" class="api-card" style="border-right-color:#0d6efd;">
+        <div class="card-title"><i class="fa-solid fa-list-check" style="color:#0d6efd;"></i> مواد إجبارية</div>
+        <div class="courses-list" id="mandatory-courses">
+          <!-- سيتم تعبئة المواد الإجبارية هنا -->
+        </div>
+      </div>
+      <div id="missed-card" class="api-card" style="border-right-color:#ffc107;">
+        <div class="card-title"><i class="fa-solid fa-circle-exclamation" style="color:#ffc107;"></i> مواد إجبارية لم تسجل بعد</div>
+        <div class="courses-list" id="missed-courses">
+          <!-- سيتم تعبئة المواد الإجبارية غير المسجلة هنا -->
+        </div>
+      </div>
+      <div id="elective-card" class="api-card" style="border-right-color:#6610f2;">
+        <div class="card-title"><i class="fa-solid fa-star" style="color:#6610f2;"></i> مواد اختيارية مقترحة</div>
+        <div class="courses-list" id="elective-courses">
+          <!-- سيتم تعبئة المواد الاختيارية هنا -->
+        </div>
+      </div>
+      <div id="future-card" class="api-card" style="border-right-color:#fd7e14;">
+        <div class="card-title"><i class="fa-solid fa-forward" style="color:#fd7e14;"></i> مواد إجبارية مستقبلية</div>
+        <div class="courses-list" id="future-courses">
+          <!-- سيتم تعبئة المواد الإجبارية المستقبلية هنا -->
+        </div>
+      </div>
+      <div id="help-card" class="api-card" style="border-right-color:#ff5722;">
+        <div class="card-title"><i class="fa-solid fa-question-circle" style="color:#ff5722;"></i> محتوى لم تفهمه؟</div>
+        <div style="font-size:1.08rem; color:#333; padding:0.7rem 0 0.2rem 0;">
+          إذا واجهت صعوبة في فهم أي من الكورسات أو لديك استفسار عن التسجيل أو التوصيات، يمكنك التواصل مع المرشد الأكاديمي أو مراجعة دليل الطالب. نحن هنا لمساعدتك في أي وقت!
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  async function fetchAndRenderCourses() {
+    // رقم الطالب متغير
+    const studentId = 6580;
+    // تعريف روابط الـ APIs
+    const apis = {
+      mandatory: `http://web-production-6364b.up.railway.app/api/recommendations/mandatory/${studentId}`,
+      missed: 'http://web-production-6364b.up.railway.app/api/recommendations/missed-mandatory-courses/6580',
+      elective: 'http://web-production-6364b.up.railway.app/api/recommendations/elective/6580',
+      future: 'http://web-production-6364b.up.railway.app/api/recommendations/future-mandatory-courses/3735',
+    };
+
+    // عناصر الكاردات
+    const mandatoryDiv = document.getElementById('mandatory-courses');
+    const missedDiv = document.getElementById('missed-courses');
+    const electiveDiv = document.getElementById('elective-courses');
+    const futureDiv = document.getElementById('future-courses');
+
+    // دالة توليد كارد كورس
+    function createCourseCard(course, color, reason) {
+      // زرار التسجيل (لون أصفر ثابت وخط أبيض)
+      const enrollBtn = `<button class="btn btn-warning enroll-btn" style="background-color:#ffc107 !important;color:#fff !important;font-weight:bold;margin-top:0.7rem;border:none;" data-courseid="${course.id}">تسجيل</button>`;
+      return `<div class="course-card" style="border-right-color:${color}">
+        <div class="course-title"><i class="fa-solid fa-list-check" style="color:${color}"></i> ${course.name}</div>
+        <div class="course-code">كود: ${course.code || ''}</div>
+        <div class="course-desc">${course.description || ''}</div>
+        <div class="prof">${course.professor_name ? 'د. ' + course.professor_name : ''}</div>
+        <div class="meta">
+          ${course.credits ? `<span class="badge bg-primary">${course.credits} ساعات</span>` : ''}
+          ${course.available_seats ? `<span class="badge bg-success">مقاعد: ${course.available_seats}</span>` : ''}
+          ${course.day_name ? `<span class="badge bg-info">${course.day_name}</span>` : ''}
+          ${course.start_time && course.end_time ? `<span class="badge bg-secondary">${course.start_time.slice(0,5)} - ${course.end_time.slice(0,5)}</span>` : ''}
+          ${course.location ? `<span class="badge bg-light text-dark">${course.location}</span>` : ''}
+        </div>
+        ${reason ? `<div class="reason">${reason}</div>` : ''}
+        ${enrollBtn}
+      </div>`;
+    }
+
+    // دالة مساعدة: تحقق إذا كان الكورس مسجل بالفعل
+    function isCourseEnrolled(courseId) {
+      const enrolled = JSON.parse(localStorage.getItem('enrolled_courses') || '[]');
+      return enrolled.includes(courseId);
+    }
+
+    // دالة مساعدة: أضف كورس للمواد المسجلة
+    function addEnrolledCourse(courseId) {
+      let enrolled = JSON.parse(localStorage.getItem('enrolled_courses') || '[]');
+      if (!enrolled.includes(courseId)) {
+        enrolled.push(courseId);
+        localStorage.setItem('enrolled_courses', JSON.stringify(enrolled));
+      }
+    }
+
+    // دالة عرض المواد المسجلة في الجلسة الحالية فقط
+    function renderSessionRegisteredCourses() {
+      const container = document.getElementById('session-registered-courses');
+      const list = document.getElementById('session-registered-list');
+      let registered = JSON.parse(localStorage.getItem('registered_courses') || '[]');
+      if (registered.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+      container.style.display = '';
+      list.innerHTML = registered.map(c => `
+        <div class="course-card" style="border-right-color:#28a745">
+          <div class="course-title"><i class="fa-solid fa-check-circle" style="color:#28a745"></i> ${c.name}</div>
+          <div class="course-code">كود: ${c.code || ''}</div>
+          <div class="course-desc">${c.description || ''}</div>
+          <div class="prof">${c.professor || ''}</div>
+          <div class="meta">
+            ${(c.meta||[]).map(m => `<span class="badge bg-secondary">${m}</span>`).join(' ')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // بعد تعبئة الكورسات، فعل زرار التسجيل
+    function activateEnrollButtons() {
+      document.querySelectorAll('.enroll-btn').forEach(btn => {
+        btn.onclick = async function() {
+          const courseId = this.getAttribute('data-courseid');
+          this.disabled = true;
+          this.innerText = 'جاري التسجيل...';
+          // --- تنفيذ محلي فقط ---
+          // احصل على بيانات الكورس من العنصر الأب
+          const courseCard = this.closest('.course-card');
+          const courseName = courseCard.querySelector('.course-title').innerText.replace(/^\s*\S+\s+/, '');
+          const courseCode = courseCard.querySelector('.course-code').innerText.replace('كود: ', '');
+          const courseDesc = courseCard.querySelector('.course-desc').innerText;
+          const prof = courseCard.querySelector('.prof').innerText;
+          const meta = Array.from(courseCard.querySelectorAll('.meta .badge')).map(b => b.innerText);
+          // أضف الكورس للمواد المسجلة في localStorage
+          let registered = JSON.parse(localStorage.getItem('registered_courses') || '[]');
+          registered.push({
+            id: Number(courseId),
+            name: courseName,
+            code: courseCode,
+            description: courseDesc,
+            professor: prof,
+            meta: meta
+          });
+          localStorage.setItem('registered_courses', JSON.stringify(registered));
+          // أضف الكورس للمواد المسجلة (لمنع تكرار التسجيل)
+          addEnrolledCourse(Number(courseId));
+          // أخفِ الكورس من صفحة تسجيل المواد
+          courseCard.style.display = 'none';
+          // رسالة نجاح
+          alert('تم تسجيل المادة بنجاح');
+          // أعد عرض المواد المسجلة في الجلسة
+          renderSessionRegisteredCourses();
+          // لا تزل كود POST، فقط أرسله ولا تنتظر نتيجته
+          fetch('http://web-production-6364b.up.railway.app/api/students/enrollments/6580', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ course_id: Number(courseId) })
+          });
+        }
+      });
+      // عند تحميل الصفحة: إذا المادة مسجلة بالفعل، غيّر الزر
+      document.querySelectorAll('.enroll-btn').forEach(btn => {
+        const courseId = Number(btn.getAttribute('data-courseid'));
+        if (isCourseEnrolled(courseId)) {
+          btn.innerText = 'تم التسجيل';
+          btn.disabled = true;
+        }
+      });
+      // عند تحميل الصفحة، اعرض المواد المسجلة في الجلسة
+      renderSessionRegisteredCourses();
+    }
+
+    // مواد إجبارية
+    try {
+      mandatoryDiv.innerHTML = '<div class="loading">جاري التحميل...</div>';
+      const res = await fetch(apis.mandatory);
+      const data = await res.json();
+      let courses = data.data?.mandatory_courses || [];
+      if (courses.length === 0) {
+        // fallback للمواد الافتراضية (بدون .course)
+        courses = [
+          {
+            name: "ميكانيكا",
+            code: "M121",
+            description: "الميكانيكا الكلاسيكية - حركة الجسيمات، قوانين نيوتن، الطاقة والزخم",
+            credits: 3,
+            available_seats: 100,
+            professor_name: "سهام عبد العزيز",
+            day_name: "الأربعاء",
+            start_time: "09:00:00",
+            end_time: "11:00:00",
+            location: "مدرج حاسبات 2"
+          },
+          {
+            name: "هندسة (1)",
+            code: "M113",
+            description: "الهندسة التحليلية - المعادلات البارامترية، الإحداثيات القطبية، والأسطح الثنائية",
+            credits: 3,
+            available_seats: 100,
+            professor_name: "أحمد سعيد مرسي",
+            day_name: "الثلاثاء",
+            start_time: "09:00:00",
+            end_time: "11:00:00",
+            location: "قاعة 4"
+          },
+          {
+            name: "مقدمة في الحاسب الآلي",
+            code: "UP131",
+            description: "أساسيات البرمجة - الخوارزميات، هياكل البيانات، وحل المشكلات باستخدام Python",
+            credits: 2,
+            available_seats: 100,
+            professor_name: "إيمان صبحي رضوان",
+            day_name: "السبت",
+            start_time: "09:00:00",
+            end_time: "11:00:00",
+            location: "مدرج حاسبات 1"
+          }
+        ];
+        mandatoryDiv.innerHTML = courses.map(c => createCourseCard(c, '#0d6efd')).join('');
+      } else {
+        // كل عنصر فيه .course و .recommendation_reason
+        mandatoryDiv.innerHTML = courses.map(c => createCourseCard(c.course, '#0d6efd', c.recommendation_reason)).join('');
+      }
+      activateEnrollButtons();
+    } catch {
+      mandatoryDiv.innerHTML = '<div class="error-msg">حدث خطأ أثناء تحميل المواد الإجبارية</div>';
+    }
+
+    // مواد إجبارية لم تسجل بعد
+    try {
+      missedDiv.innerHTML = '<div class="loading">جاري التحميل...</div>';
+      const res = await fetch(apis.missed);
+      const data = await res.json();
+      const courses = data.missed_mandatory_courses || [];
+      if (courses.length === 0) {
+        missedDiv.innerHTML = '<div class="error-msg">لا يوجد مواد إجبارية متأخرة</div>';
+      } else {
+        missedDiv.innerHTML = courses.map(c => createCourseCard(c.course, '#ffc107', c.recommendation_reason)).join('');
+      }
+      activateEnrollButtons();
+    } catch {
+      missedDiv.innerHTML = '<div class="error-msg">حدث خطأ أثناء تحميل المواد المتأخرة</div>';
+    }
+
+    // مواد اختيارية
+    try {
+      electiveDiv.innerHTML = '<div class="loading">جاري التحميل...</div>';
+      const res = await fetch(apis.elective);
+      const data = await res.json();
+      const courses = data.data?.elective_courses || [];
+      if (courses.length === 0) {
+        electiveDiv.innerHTML = '<div class="error-msg">لا يوجد مواد اختيارية مقترحة</div>';
+      } else {
+        electiveDiv.innerHTML = courses.map(c => createCourseCard(c.course, '#6610f2', c.recommendation_reason)).join('');
+      }
+      activateEnrollButtons();
+    } catch {
+      electiveDiv.innerHTML = '<div class="error-msg">حدث خطأ أثناء تحميل المواد الاختيارية</div>';
+    }
+
+    // مواد إجبارية مستقبلية
+    try {
+      futureDiv.innerHTML = '<div class="loading">جاري التحميل...</div>';
+      const res = await fetch(apis.future);
+      const data = await res.json();
+      const courses = data.future_mandatory_courses || [];
+      if (courses.length === 0) {
+        futureDiv.innerHTML = `<div class="error-msg">${data.summary?.message || 'لا يوجد مواد إجبارية مستقبلية'}</div>`;
+      } else {
+        futureDiv.innerHTML = courses.map(c => createCourseCard(c, '#fd7e14')).join('');
+      }
+      activateEnrollButtons();
+    } catch {
+      futureDiv.innerHTML = '<div class="error-msg">حدث خطأ أثناء تحميل المواد المستقبلية</div>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', fetchAndRenderCourses);
+  </script>
+</body>
+</html> 
